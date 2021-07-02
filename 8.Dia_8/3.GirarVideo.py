@@ -13,11 +13,12 @@ while True:
     if not ret:
         break
     
-    frame=cv2.flip(frame,1) #Giramos al pantalla
-    frame =cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY) #Ponemos la pantalla en escala de grises
-    # Aplicamos el filtro adaptativo
-    frame=cv2.adaptiveThreshold(frame,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,2)
-
+    h,w = frame.shape[:2] #tupla que regresa 2 valores alto y ancho de la imagen
+    #// solo nos da la perte entera del resultado
+    centro=(w//2,h//2)
+    MatrizdeGiro = cv2.getRotationMatrix2D(centro,-45,1)#centro,angle,scale
+    #el giro lo hace la siguiente funcion
+    frame = cv2.warpAffine(frame,MatrizdeGiro,(w,h))
     cv2.imshow('Camara',frame)
     c=cv2.waitKey(1)
     if c==27: #Codigo

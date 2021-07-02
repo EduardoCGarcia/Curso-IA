@@ -20,4 +20,6 @@ for i in range(len(imgs)):
     plt.yticks([])
 
 
+
+
 plt.waitforbuttonpress()
